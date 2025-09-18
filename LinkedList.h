@@ -27,6 +27,17 @@ public:
     LinkedList() : head(nullptr) {}
 
     void append(T value) {
+        Node<T>* newNode = new Node<T>(value);
+        if (head == nullptr) {
+            head = newNode;
+        }
+        else {
+            Node<T>* current = head;
+            while (current->next != nullptr) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
 
     }
 
@@ -39,6 +50,18 @@ public:
     }
 
     void deleteLast() {
+        if (!head) return;
+        if (head->next == nullptr) {
+            delete head;
+            head = nullptr;
+            return;
+        }
+        Node<T>* current = head;
+        while (current->next->next) {
+            current = current->next;
+        }
+        delete current->next;
+        current->next = nullptr;
 
     }
     void deleteAtIndex(int index) {
