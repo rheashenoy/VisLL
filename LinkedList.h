@@ -42,11 +42,16 @@ public:
     }
 
     void addFirst(T value) {
-
+        Node<T>* newNode = new Node<T>(value);
+        newNode->next = head;
+        head = newNode;
     }
 
     void deleteFirst() {
-
+        if (head == nullptr) {return;}
+        Node<T>* temp = head;
+        head = head->next;
+        delete temp;
     }
 
     void deleteLast() {
@@ -78,7 +83,11 @@ public:
     }
 
     ~LinkedList() {
-
+        while (head) {
+            Node<T>* temp = head;
+            head = head->next;
+            delete temp;
+        }
     }
 };
 
