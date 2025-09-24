@@ -17,10 +17,18 @@ void drawGUI() {
     // 🔢 Index input box + Delete At Index button
     static int indexToDelete = 0;
     ImGui::Text("Enter an index to delete:");
-    ImGui::InputInt("##IndexInput", &indexToDelete);
+    ImGui::InputInt("##IndexToDelete", &indexToDelete);
     ImGui::SameLine();
     if (ImGui::Button("Delete At Index")) {
         ll.deleteAtIndex(indexToDelete);
+    }
+    static int indexToAdd = 0;
+    ImGui::Text("Enter an index to Add:");
+    ImGui::InputInt("##IndexToAdd", &indexToAdd);
+    ImGui::SameLine();
+    if (ImGui::Button("Add At Index")) {
+        std::string label = "X" + std::to_string(counter++);
+        ll.addAtIndex(label, indexToAdd);
     }
 
     ImGui::Spacing(); ImGui::Spacing();

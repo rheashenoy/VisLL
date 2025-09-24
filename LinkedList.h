@@ -70,8 +70,36 @@ public:
 
     }
     void deleteAtIndex(int index) {
+        if (!head || index < 0){return;}
+        if (index == 0) {deleteFirst();}
+        Node<T>* curr = head;
+        Node<T>* previous = nullptr;
+        int currIndex = 0;
+        while (curr != nullptr && currIndex < index) {
+            previous = curr;
+            curr = curr->next;
+            currIndex++;
+        }
+        previous->next = curr->next;
+        delete curr;
+    }
+    void addAtIndex(T value, int index) {
+        Node<T>* newNode = new Node<T>(value);
+        if (!head){head = newNode;}
+        else if (index<0){return;}
+        else {
+            Node<T>* curr = head;
+            Node<T>* previous = nullptr;
+            int currIndex = 0;
+            while (curr != nullptr && currIndex < index) {
+                previous = curr;
+                curr = curr->next;
+                currIndex++;
+            }
 
-        // Else index was out of bounds, do nothing
+            previous->next = newNode;
+            newNode->next = curr;
+        }
     }
     void forEach(std::function<void(const T&, bool)> callback) {
         Node<T>* current = head;
@@ -89,6 +117,7 @@ public:
             delete temp;
         }
     }
+
 };
 
 #endif // LINKEDLIST_H
